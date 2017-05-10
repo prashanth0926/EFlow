@@ -9,7 +9,7 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var user = new schema({
     username : String,
     password : String,
-    name: String,
+    fullName: String,
     imageUrl: {
         type: String,
         default: 'https://www.mautic.org/media/images/default_avatar.png'
@@ -24,7 +24,10 @@ var user = new schema({
             ref : 'Question'
         }
     ],
-    answerCount : Number,
+    answerCount : {
+        type: Number,
+        default: 0
+    },
     topicsFollowing : [String],
     details : {}
 }, {

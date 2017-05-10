@@ -15,6 +15,18 @@ var answerSchema = new schema({
         ref : 'User'
     },
     slackUserName: String,
+    upVotes:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
+    downVotes:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
     details : {}
 }, {
     timestamps : true
@@ -33,6 +45,18 @@ var qaSchema = new schema({
         ref: 'User'
     },
     slackUserName: String,
+    upVotes:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
+    downVotes:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
     details: {}
 }, {
     timestamps: true

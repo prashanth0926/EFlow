@@ -13,15 +13,33 @@ router.get('/', verify.verifyOrdinaryUser, verify.verifyAdmin, function(req, res
   });
 });
 
+router.get('/count', verify.verifyOrdinaryUser, function(req, res, next) {
+  User.find({}, function (err, out) {
+    if (err)  throw err;
+    res.json({count: out.length});
+  });
+});
+
 router.get('/hasRegistered/:username', function(req, res, next) {
   User.find({username: req.params.username}, function (err, out) {
     if (err)  throw err;
-    res.json(!_.isEmpty(out));
+    res.json({hasRegistered: !_.isEmpty(out)});
+  });
+});
+
+router.get('/incAnswer', verify.verifyOrdinaryUser, function(req, res, next) {
+  User.findById(req.decoded._id, function (err, out) {
+    if (err)  throw err;
+    out.answerCount++;
+    out.save(function (err, out) {
+      if (err)  throw err;
+      res.json(out);
+    })
   });
 });
 
 router.put('/updateCurrent', verify.verifyOrdinaryUser, function (req, res, next) {
-  Movies.findByIdAndUpdate(req.decoded._id, {
+  User.findByIdAndUpdate(req.decoded._id, {
     $set : req.body
   }, {
     new : true
@@ -34,6 +52,8 @@ router.put('/updateCurrent', verify.verifyOrdinaryUser, function (req, res, next
   });
 });
 
+
+
 router.get('/current', verify.verifyOrdinaryUser, function(req, res, next) {
   User.findById(req.decoded._id).exec(function (err, out) {
     if (err) throw err;
@@ -45,8 +65,7 @@ router.post('/register', function (req, res, next) {
   User.register(new User({ username : req.body.username}),
       req.body.password, function (err, out) {
         if (err)  return res.status(500).json({err: err});
-        out.firstname = req.body.firstname;
-        out.lastname = req.body.lastname;
+        out.fullName = req.body.fullName;
         out.imageUrl = req.body.imageUrl;
         out.save(function (err, out) {
           if (err)  return res.status(500).json({err: err});

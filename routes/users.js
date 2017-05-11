@@ -30,7 +30,7 @@ router.get('/hasRegistered/:username', function(req, res, next) {
 router.get('/incAnswer', verify.verifyOrdinaryUser, function(req, res, next) {
   User.findById(req.decoded._id, function (err, out) {
     if (err)  throw err;
-    out.answerCount++;
+    out.answerCount = out.answerCount+1;
     out.save(function (err, out) {
       if (err)  throw err;
       res.json(out);
@@ -55,10 +55,12 @@ router.put('/updateCurrent', verify.verifyOrdinaryUser, function (req, res, next
 
 
 router.get('/current', verify.verifyOrdinaryUser, function(req, res, next) {
-  User.findById(req.decoded._id).exec(function (err, out) {
-    if (err) throw err;
-    res.json(out);
-  });
+  User.findById(req.decoded._id)
+      .populate({path: 'askedQuestions'})
+      .exec(function (err, out) {
+        if (err) throw err;
+        res.json(out);
+      });
 });
 
 router.post('/register', function (req, res, next) {
@@ -97,7 +99,8 @@ router.post('/login', function (req, res, next) {
       res.status(200).json({
         status: 'Login successful!',
         success: true,
-        token: token
+        token: token,
+        uid: user._id
       });
     });
   })(req,res,next);

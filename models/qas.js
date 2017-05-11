@@ -18,13 +18,15 @@ var answerSchema = new schema({
     upVotes:[
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            unique: true
         }
     ],
     downVotes:[
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            unique: true
         }
     ],
     details : {}
@@ -48,13 +50,15 @@ var qaSchema = new schema({
     upVotes:[
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            unique: true
         }
     ],
     downVotes:[
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            unique: true
         }
     ],
     details: {}

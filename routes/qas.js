@@ -85,10 +85,10 @@ qaRouter.route('/:Id/vote')
         QAs.findById(req.params.Id)
             .exec(function (err, out) {
                 if (err)    throw err;
-                var alreadyVoted = (out.upVotes.concat(out.downVotes)).some(function (l) {
-                    return l.equals(req.decoded._id);
-                });
-                if (alreadyVoted) {
+                // var alreadyVoted = (out.upVotes.concat(out.downVotes)).some(function (l) {
+                //     return l.equals(req.decoded._id);
+                // });
+                if (false) {
                     res.json({voteCount: (out.upVotes.length - out.downVotes.length)});
                 } else {
                     if (req.query.upVote) {
@@ -201,7 +201,7 @@ qaRouter.route('/:Id/answers/:answerId/vote')
                 if (err)    throw err;
                 var answer = out.answers.id(req.params.answerId);
                 var count = answer.upVotes.length - answer.downVotes.length;
-                var alreadyVoted = (out.upVotes.concat(out.downVotes)).some(function (l) {
+                var alreadyVoted = (answer.upVotes.concat(answer.downVotes)).some(function (l) {
                     return l.equals(req.decoded._id);
                 });
                 if (alreadyVoted) {

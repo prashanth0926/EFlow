@@ -21,7 +21,7 @@ var user = new schema({
     askedQuestions : [
         {
             type : mongoose.Schema.Types.ObjectId,
-            ref : 'Question'
+            ref : 'QA'
         }
     ],
     answerCount : {

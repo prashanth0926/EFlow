@@ -85,10 +85,10 @@ qaRouter.route('/:Id/vote')
         QAs.findById(req.params.Id)
             .exec(function (err, out) {
                 if (err)    throw err;
-                // var alreadyVoted = (out.upVotes.concat(out.downVotes)).some(function (l) {
-                //     return l.equals(req.decoded._id);
-                // });
-                if (false) {
+                var alreadyVoted = (out.upVotes.concat(out.downVotes)).some(function (l) {
+                    return l.equals(req.decoded._id);
+                });
+                if (alreadyVoted) {
                     res.json({voteCount: (out.upVotes.length - out.downVotes.length)});
                 } else {
                     if (req.query.upVote) {

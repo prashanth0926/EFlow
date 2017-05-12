@@ -100,7 +100,8 @@ router.post('/login', function (req, res, next) {
         status: 'Login successful!',
         success: true,
         token: token,
-        uid: user._id
+        uid: user._id,
+        admin: user.admin
       });
     });
   })(req,res,next);

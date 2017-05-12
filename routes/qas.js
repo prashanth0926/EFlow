@@ -91,7 +91,7 @@ qaRouter.route('/:Id/vote')
                 if (alreadyVoted) {
                     res.json({voteCount: (out.upVotes.length - out.downVotes.length)});
                 } else {
-                    if (req.query.upVote) {
+                    if (req.query.upVote === true) {
                         out.upVotes.push(req.decoded._id);
                     } else {
                         out.downVotes.push(req.decoded._id);
@@ -207,7 +207,7 @@ qaRouter.route('/:Id/answers/:answerId/vote')
                 if (alreadyVoted) {
                     res.json({voteCount: count});
                 } else {
-                    if (req.query.upVote) {
+                    if (req.query.upVote === true) {
                         answer.upVotes.push(req.decoded._id);
                         count++;
                     } else {

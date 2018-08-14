@@ -7,7 +7,7 @@ module.exports = {
     'mongoUrl': process.env.MONGO_URL || 'mongodb://localhost:27017/upflow',
     'nodeEmail': process.env.NODE_EMAIL,
     'nodeEmailPassword': process.env.NODE_EMAIL_PASSWORD,
-    'toMail': process.env.TO_EMAIL,
+    'mailTo': process.env.TO_EMAIL,
     'mailService': process.env.MAIL_SERVICE
 };
 

@@ -7,14 +7,16 @@ var userMessageSchema = new Schema({
     reason: String,
     message: String
 }, {
-    timestamps: true
+    timestamps: true,
+    usePushEach: true
 });
 
 var portSchema = new Schema({
     userMessage: [userMessageSchema]
 }, {
     strict: false,
-    timestamps: true
+    timestamps: true,
+    usePushEach: true
 });
 
 var Ports = mongoose.model('Port', portSchema);

@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var profileSchema = new Schema({
 }, {
     strict: false,
-    timestamps: true
+    timestamps: true,
+    usePushEach: true
 });
 
 var Profile = mongoose.model('Profile', profileSchema);

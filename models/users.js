@@ -31,7 +31,8 @@ var user = new schema({
     topicsFollowing : [String],
     details : {}
 }, {
-    timestamps : true
+    timestamps : true,
+    usePushEach: true
 });
 
 user.plugin(passportLocalMongoose);

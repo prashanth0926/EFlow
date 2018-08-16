@@ -31,7 +31,8 @@ var answerSchema = new schema({
     ],
     details : {}
 }, {
-    timestamps : true
+    timestamps : true,
+    usePushEach: true
 });
 
 var qaSchema = new schema({
@@ -63,7 +64,8 @@ var qaSchema = new schema({
     ],
     details: {}
 }, {
-    timestamps: true
+    timestamps: true,
+    usePushEach: true
 });
 
 var QAs = mongoose.model('QA', qaSchema);

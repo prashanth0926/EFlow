@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
 portRouter.use(bodyParser.json());
 
 portRouter.route('/')
-    .get(verify.verifyOrdinaryUser, function (req, res, next) {
+    .get(function (req, res, next) {
         Ports.find({}, function (err, resp) {
             if (err) throw err;
             res.json(resp);

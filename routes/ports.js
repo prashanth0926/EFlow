@@ -26,7 +26,7 @@ portRouter.route('/')
     .post(function (req, res, next) {
         const decReq = JSON.parse(Buffer.from(req.body.payload, 'base64').toString());
         Ports.find({
-            query: decReq.query
+            query: (decReq.query || decReq.ip)
         }, function (err, resp) {
             if (err) throw err;
             if (resp.length) {
@@ -63,7 +63,7 @@ portRouter.route('/')
                     res.end('port already exists!');
                 }
             } else {
-                Ports.create(decReq, function (err, resp) {
+                Ports.create({ ...decReq, query: (decReq.query || decReq.ip) }, function (err, resp) {
                     if (err) throw err;
                     var id = resp._id;
 
